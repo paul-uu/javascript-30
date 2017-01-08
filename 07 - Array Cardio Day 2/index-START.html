@@ -24,17 +24,42 @@
       { text: 'Nice Nice Nice!', id: 542328 }
     ];
 
+
+    function gte19(person) {
+      if (person.year) {
+        const currentYear = (new Date()).getFullYear();
+        return (currentYear - person.year) >= 19;
+      }
+    }
+
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    const isAdult = people.some((person) => { return gte19(person); });
+    console.log("is at least one person 19 or older?");
+    console.log(isAdult);
+
+
     // Array.prototype.every() // is everyone 19 or older?
+    const allAdult = people.every((person) => { return gte19(person); });
+    console.log("is everyone 19 or older?");
+    console.log(allAdult);
+
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const ID = 823423;
+    const comment = comments.find((comment) => { return comment.id === ID; });
+    console.log("find the comment with the ID of 823423");
+    console.log(comment);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    const index = comments.findIndex((comment) => { return comment.id === ID });
+    comments.splice(index, 1);
+    console.log("find and delete comment with ID 823423");
+    console.table(comments);
 
   </script>
 </body>

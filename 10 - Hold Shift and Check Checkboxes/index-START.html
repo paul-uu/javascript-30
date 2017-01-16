@@ -129,7 +129,7 @@ let lastCheckbox;
 
 function checkboxClick() {
 
-  if (shiftDown) {
+  if (shiftDown && this.checked) {
 
     /* todo: determine 'lastCheckbox' better */
     if (lastCheckbox.checked) {

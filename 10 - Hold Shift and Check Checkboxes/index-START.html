@@ -104,6 +104,55 @@
   </div>
 
 <script>
+
+let shiftDown = false;
+document.onkeydown = function(e) {
+  if (e.shiftKey)
+    shiftDown = true;
+}
+document.onkeyup = function(e) {
+  if (e.key === 'Shift') 
+    shiftDown = false;
+}
+
+let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+checkboxes = Array.from(checkboxes);
+
+let i = 1;
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('click', checkboxClick);
+  checkbox.index = i++; /* assign a sequence of index properties + values to each DOM node */
+});
+
+/* represents starting point from which to check off checkboxes */
+let lastCheckbox;
+
+function checkboxClick() {
+
+  if (shiftDown) {
+
+    /* todo: determine 'lastCheckbox' better */
+    if (lastCheckbox.checked) {
+
+      /* determine lower and upper bounds of range of checkboxes to check by index */
+      const max = Math.max(lastCheckbox.index, this.index);
+      const min = Math.min(lastCheckbox.index, this.index);
+
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.index >= min && checkbox.index <= max) {
+          checkbox.checked = true;
+        }
+      });
+    }
+  }
+  if (this.checked) {
+    lastCheckbox = this;
+  }
+}
+
+
+
+
 </script>
 </body>
 </html>
